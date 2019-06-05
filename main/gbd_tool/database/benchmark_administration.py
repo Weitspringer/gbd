@@ -57,6 +57,7 @@ def remove_benchmarks(db):
                 eprint("Problem '{}' not found. Removing...".format(p))
                 database.submit("DELETE FROM benchmarks WHERE value='{}'".format(p))
 
+
 def register_benchmark(db, path):
     try:
         with Database(db) as database:
@@ -75,6 +76,7 @@ def register_benchmark(db, path):
     except Exception as e:
         eprint(e)
         return
+
 
 # todo: parallelize hashing
 def register_benchmarks(db, root):
