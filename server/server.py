@@ -9,6 +9,7 @@ from zipfile import ZipInfo, ZipFile
 import tatsu
 from flask import Flask, render_template, request, send_file, json
 from flask.logging import default_handler
+from flask_cors import CORS
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from gbd_tool.gbd_api import GbdApi
@@ -26,6 +27,7 @@ logging.getLogger().addHandler(default_handler)
 app = Flask(__name__, static_folder="static", template_folder="templates")
 app.wsgi_app = ProxyFix(app.wsgi_app, num_proxies=1)
 limiter = Limiter(app, key_func=get_remote_address)
+CORS(app)
 
 DATABASE = os.environ.get('GBD_DB')
 ZIPCACHE_PATH = 'zipcache'
