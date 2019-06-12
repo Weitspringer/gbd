@@ -7,7 +7,7 @@ from sqlite3 import OperationalError
 from zipfile import ZipInfo, ZipFile
 
 import tatsu
-from flask import Flask, render_template, request, send_file, json
+from flask import Flask, render_template, request, send_file, json, jsonify
 from flask.logging import default_handler
 from flask_cors import CORS
 from flask_limiter import Limiter
@@ -226,34 +226,9 @@ def handle_cli_resolve_request(req):
 @app.route("/groups/all", methods=['GET'])
 def reflect():
     request_semaphore.acquire()
-    response = generate_html_header('en')
-    url = '/static/resources/gbd_logo_small.png'
-    response += "<body>" \
-                "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">" \
-                "   <a href=\"/\" class=\"navbar-left\"><img style=\"max-width:50px\" src=\"{}\"></a>" \
-                "   <a class=\"navbar-brand\" href=\"#\"></a>" \
-                "   <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" " \
-                "       data-target=\"#navbarNavAltMarkup\"" \
-                "       aria-controls=\"navbarNavAltMarkup\" " \
-                "       aria-expanded=\"false\"" \
-                "       aria-label=\"Toggle navigation\">" \
-                "       <span class=\"navbar-toggler-icon\"></span>" \
-                "   </button>" \
-                "   <div class=\"collapse navbar-collapse\" id=\"navbarNavAltMarkup\">" \
-                "       <div class=\"navbar-nav\">" \
-                "           <a class=\"nav-item nav-link\" href=\"/\">Home</a>" \
-                "           <a class=\"nav-item nav-link active\" href=\"#\">Groups" \
-                "                   <span class=\"sr-only\">(current)</span></a>" \
-                "           <a class=\"nav-item nav-link\" href=\"/query/form\">Search</a>" \
-                "           <a class=\"nav-item nav-link\" href=\"/resolve/form\">Resolve</a>" \
-                "       </div>" \
-                "   </div>" \
-                "</nav>" \
-                "<hr>".format(url)
-    reflection = gbd_api.get_all_groups()
-    response += generate_num_table_div(reflection)
+    response = json.dumps(gbd_api.get_all_groups())
     request_semaphore.release()
-    return response
+    return jsonify(response)
 
 
 @app.route("/groups/reflect", methods=['GET'])
