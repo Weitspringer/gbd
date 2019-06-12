@@ -39,3 +39,4 @@ FETCH_HEAD
 
 cli_config/*
 server_config/*
+*/venv/*
