@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="App">
+<html lang="en" ng-app="homeApp">
     <head>
         <title></title>
         <meta charset="utf-8">
@@ -8,8 +8,8 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     </head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <body ng-controller="Controller">
+    <script src="{{ url_for('static', filename='js/homeController.js') }}"></script>
+    <body ng-controller="homeController">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a href="/" class="navbar-left"><img style="max-width:50px" src="{{ url_for('static',
         filename='resources/gbd_logo_small.png') }}"></a>
@@ -32,10 +32,7 @@
     <div class="container">
         <div>
         {% raw %}
-        First Name: <input type="text" ng-model="firstName"><br>
-        Last Name: <input type="text" ng-model="lastName"><br>
-        <br>
-        Full Name: {{firstName + " " + lastName}}
+        This url: {{url}}
         {% endraw %}
         </div>
         <div class="container" id="header">
