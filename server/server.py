@@ -223,12 +223,17 @@ def handle_cli_resolve_request(req):
         return json.dumps("Hash not found in our DATABASE")
 
 
-@app.route("/groups/all", methods=['GET'])
+@app.route("/groups/getall", methods=['GET'])
 def reflect():
     request_semaphore.acquire()
     response = json.dumps(gbd_api.get_all_groups())
     request_semaphore.release()
     return jsonify(response)
+
+
+@app.route("/groups/all", methods=['GET'])
+def all_groups():
+    return render_template('groups.html')
 
 
 @app.route("/groups/reflect", methods=['GET'])
