@@ -20,7 +20,7 @@
     </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="/">Home</a>
+          <a class="nav-item nav-link" href="/">Home</a>
             <a class="nav-item nav-link active" href="#">Groups<span class="sr-only">(current)</span></a>
           <a class="nav-item nav-link" href="/query/form">Search</a>
           <a class="nav-item nav-link" href="/resolve/form">Resolve</a>
@@ -32,9 +32,11 @@
     <div class="container">
         <div>
         {% raw %}
-        This url: {{ url }}
+        This url: {{ url }} {{ listOfAllGroups }}
         </div>
-        <listOfGroups></listOfGroups>
+        <ul>
+            <li ng-repeat="x in listOfAllGroups">{{ x }}</li>
+        </ul>
         {% endraw %}
     </div>
     </main>

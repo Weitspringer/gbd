@@ -7,7 +7,7 @@ from sqlite3 import OperationalError
 from zipfile import ZipInfo, ZipFile
 
 import tatsu
-from flask import Flask, render_template, request, send_file, json, jsonify
+from flask import Flask, render_template, request, send_file, json
 from flask.logging import default_handler
 from flask_cors import CORS
 from flask_limiter import Limiter
@@ -228,7 +228,7 @@ def reflect():
     request_semaphore.acquire()
     response = json.dumps(gbd_api.get_all_groups())
     request_semaphore.release()
-    return jsonify(response)
+    return response
 
 
 @app.route("/groups/all", methods=['GET'])
